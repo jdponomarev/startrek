@@ -1,0 +1,74 @@
+.skybender {
+	background: url(skybender-sprite.png) no-repeat;
+	display: block;
+	width: 500px;
+	height: 584px;
+	background-position: -5px -5px;
+	
+}
+
+.skybender-skybender_center {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -5px;
+}
+
+.skybender-skybender_left_1 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -599px;
+}
+
+.skybender-skybender_left_2 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -1193px;
+}
+
+.skybender-skybender_left_3 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -1787px;
+}
+
+.skybender-skybender_left_4 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -2381px;
+}
+
+.skybender-skybender_left_5 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -2975px;
+}
+
+.skybender-skybender_right_1 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -3569px;
+}
+
+.skybender-skybender_right_2 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -4163px;
+}
+
+.skybender-skybender_right_3 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -4757px;
+}
+
+.skybender-skybender_right_4 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -5351px;
+}
+
+.skybender-skybender_right_5 {
+	width: 500px;
+	height: 584px;
+	background-position: -5px -5945px;
+}
