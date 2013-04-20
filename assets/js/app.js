@@ -45,12 +45,25 @@ function init(){
 	skybender.width=world.coeff*500;
 	skybender.height=world.coeff*584;
 
-	world.skybenderY=world.height-skybender.height/2-20;
+	world.skybenderY=skybender.height/2-20+(580*(1-world.coeff));
 
-	skybender.x=world.laneWidth*3.5;
-	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";
-	skybender.transforms.translated3d="translate3d("+ (skybender.x+skybender.width/2) +'px,'+world.skybenderY+"px,100px) ";
+	skybender.x=world.laneWidth*2.5+(500*(1-world.coeff))+skybender.width/2;
+	
+	//alert(skybender.width);
+	//alert(world.width);
+
+	
+
+	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";	
+	skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,100px)";
+
+
 	skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));
+
+	skybender.$el.css({	
+		width:"500px",
+		height:"584px"
+	});
 };
 
 function generateTransformString(transforms){
@@ -81,7 +94,7 @@ function render(){
 			skybender.x+=skybender.xShift;
 		}
 
-		skybender.transforms.translated3d="translate3d("+ (skybender.x+skybender.width/2) +'px,'+world.skybenderY+"px,100px) ";
+		skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,100px) ";
 		skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));		
 
 		skybender.$el.removeClass("skybender-skybender_center skybender-skybender_left_1 skybender-skybender_left_2 skybender-skybender_left_3 skybender-skybender_left_4 skybender-skybender_left_5 skybender-skybender_right_1 skybender-skybender_right_2 skybender-skybender_right_3 skybender-skybender_right_4 skybender-skybender_right_5");
@@ -113,7 +126,7 @@ function moveShip(params){
 		console.log("skybender is already moving");
 		return;
 	}
-	skybender.isMoving=true;
+	
 	console.log("move ship = "+JSON.stringify(params));
 	if(params.direction==="left"){
 		if(skybender.position==-2){
@@ -132,6 +145,7 @@ function moveShip(params){
 		skybender.position++;
 	}
 	skybender.direction=params.direction;
+	skybender.isMoving=true;
 
 
 	
@@ -146,11 +160,21 @@ $(document).ready(function(){
 		onDeviceReady();     
 
 		$(document).swipeLeft(function(e){
+			alert();
 			moveShip({direction:"left"});
 		});
 		$(document).swipeRight(function(e){
+			alert();
 			moveShip({direction:"right"});
 		});
+		$("body").swipeLeft(function(e){
+			alert(1);
+			moveShip({direction:"left"});
+		});
+		$("body").swipeRight(function(e){
+			alert(1);
+			moveShip({direction:"right"});
+		});		
 		//$(document).trigger("swipeRight");
 
 		$(document).keydown(function(e) {
