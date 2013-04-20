@@ -38,7 +38,7 @@ html{
 	100% {background-position: 0px 500000px;}
 }
 .animated-background{
-
+	-webkit-transform: rotate(0deg);
 }
 
 #background-1{
@@ -49,18 +49,7 @@ html{
 	-webkit-animation: bganimation 1000s infinite;
 	animation: bganimation 1000s infinite;
 	
-}
-#background-2{
-	position:absolute;
-	width:100%;
-	height:100%;
-	background:url("Parallax100.png");
-	opacity:0.8;
-	-webkit-animation: bganimation 500s infinite;
-	animation: bganimation 500s infinite;
-	
-}
-/*
+}/*
 #background-3{
 	position:absolute;
 	width:100%;
