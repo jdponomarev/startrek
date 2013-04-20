@@ -24,3 +24,41 @@ html{
 	top:0;
 	-webkit-transform:rotate(360deg);
 }
+
+@-webkit-keyframes bganimation
+{
+	0% {background-position: 0px 0px;}
+	50% {background-position: 0px 250000px;}
+	100% {background-position: 0px 500000px;}
+}
+.animated-background{
+
+}
+
+#background-1{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:url("Parallax100.png");
+	-webkit-animation: bganimation 1000s infinite;
+}
+#background-2{
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:url("Parallax100.png");
+	opacity:0.8;
+	-webkit-animation: bganimation 500s infinite;
+}
+/*
+#background-3{
+	position:absolute;
+	width:100%;
+	height:100%;
+	opacity:0.6;
+	background:url("Parallax100.png");
+	background-position: 0px 0px;
+	-webkit-animation: bganimation 100s infinite;
+}
+
+*/
