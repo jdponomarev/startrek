@@ -51,9 +51,8 @@ function init(){
 	
 	skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
 	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";	
-
-
 	skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));
+
 
 	//skybender.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+skybender.x+","+world.skybenderY+")");
 
@@ -62,12 +61,12 @@ function init(){
 		height:"584px"
 	});
 
-		$(document).swipeLeft(function(e){
-			moveShip({direction:"left"});
-		});
-		$(document).swipeRight(function(e){
-			moveShip({direction:"right"});
-		});
+	$(document).swipeLeft(function(e){
+		moveShip({direction:"left"});
+	});
+	$(document).swipeRight(function(e){
+		moveShip({direction:"right"});
+	});
 
 };
 
@@ -81,9 +80,9 @@ function generateTransformString(transforms){
 
 function render(){
 	window.requestAnimationFrame(function() {
-		setTimeout(function() {
+		//setTimeout(function() {
 			render();
-		},1000/24);
+		//},1000/24);
 	});	
 	//console.log("render");
 	if(skybender.direction!="center"){
@@ -138,7 +137,7 @@ function moveShip(params){
 			console.log("cannot move, border");
 			return;
 		}
-		skybender.xShift=-world.laneWidth/5;
+		//skybender.xShift=-world.laneWidth/5*world.coeff;
 		skybender.position--;
 	}
 	if(params.direction==="right"){
@@ -146,7 +145,7 @@ function moveShip(params){
 			console.log("cannot move, border");
 			return;
 		}
-		skybender.xShift=world.laneWidth/5;
+		skybender.xShift=world.laneWidth/5*world.coeff;
 		skybender.position++;
 	}
 	skybender.direction=params.direction;
