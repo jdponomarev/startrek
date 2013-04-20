@@ -22,4 +22,5 @@ html{
 	height:10px;
 	left:0;
 	top:0;
+	-webkit-transform:rotate(360deg);
 }

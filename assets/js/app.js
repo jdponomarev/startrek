@@ -2,7 +2,8 @@ var Trek={};
 var renders=0;
 
 var world={
-
+	skybenderWidth:110,
+	skybenderHeight:128
 };
 var skybender={
 	$el:undefined,
@@ -35,30 +36,30 @@ function init(){
 	world.width=$(window).width();
 	world.height=$(window).height();
 	
-	world.coeff=(world.width/6)/500;
+	world.coeff=(world.width/6)/world.skybenderWidth;
 	
 	//alert(world.width);
 	world.laneWidth=(world.width/6);
 
 	//alert(world.laneWidth);
 
-	skybender.width=world.coeff*500;
-	skybender.height=world.coeff*584;
+	skybender.width=world.coeff*world.skybenderWidth;
+	skybender.height=world.coeff*world.skybenderHeight;
 
-	world.skybenderY=(world.height-580);
+	world.skybenderY=(world.height-world.skybenderHeight);
 
-	skybender.x=(world.width-500)/2;
+	skybender.x=(world.width-world.skybenderWidth)/2;
 	
-	skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
-	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";	
-	skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));
+	//skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
+	//skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";	
+	//skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));
 
 
-	//skybender.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+skybender.x+","+world.skybenderY+")");
+	skybender.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+skybender.x+","+world.skybenderY+")");
 
 	skybender.$el.css({	
-		width:"500px",
-		height:"584px"
+		width:world.skybenderWidth+"px",
+		height:world.skybenderHeight+"px"
 	});
 
 	$(document).swipeLeft(function(e){
@@ -82,7 +83,7 @@ function render(){
 	window.requestAnimationFrame(function() {
 		//setTimeout(function() {
 			render();
-		//},1000/24);
+		//},1000/20);
 	});	
 	//console.log("render");
 	if(skybender.direction!="center"){
@@ -98,11 +99,18 @@ function render(){
 			skybender.x+=skybender.xShift;
 		}
 
-		skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,100px) ";
-		skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));		
 
 		skybender.$el.removeClass("skybender-skybender_center skybender-skybender_left_1 skybender-skybender_left_2 skybender-skybender_left_3 skybender-skybender_left_4 skybender-skybender_left_5 skybender-skybender_right_1 skybender-skybender_right_2 skybender-skybender_right_3 skybender-skybender_right_4 skybender-skybender_right_5");
 		skybender.$el.addClass("skybender skybender-skybender_"+skybender.direction+"_"+skybender.directionSpriteNum);
+		
+		
+		skybender.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+skybender.x+","+world.skybenderY+")");
+
+		skybender.$el.removeClass("skybender-skybender_center skybender-skybender_left_1 skybender-skybender_left_2 skybender-skybender_left_3 skybender-skybender_left_4 skybender-skybender_left_5 skybender-skybender_right_1 skybender-skybender_right_2 skybender-skybender_right_3 skybender-skybender_right_4 skybender-skybender_right_5");
+		skybender.$el.addClass("skybender skybender-skybender_"+skybender.direction+"_"+skybender.directionSpriteNum);		
+		//skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px) ";
+		//skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));		
+
 		if(skybender.directionSpriteNum==5){
 			skybender.directionBack=true;
 		}
@@ -137,7 +145,7 @@ function moveShip(params){
 			console.log("cannot move, border");
 			return;
 		}
-		//skybender.xShift=-world.laneWidth/5*world.coeff;
+		skybender.xShift=-world.laneWidth/5;
 		skybender.position--;
 	}
 	if(params.direction==="right"){
@@ -145,7 +153,8 @@ function moveShip(params){
 			console.log("cannot move, border");
 			return;
 		}
-		skybender.xShift=world.laneWidth/5*world.coeff;
+		skybender.xShift=world.laneWidth/5;
+		//alert(skybender.xShift);
 		skybender.position++;
 	}
 	skybender.direction=params.direction;

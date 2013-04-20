@@ -1,10 +1,76 @@
 .skybender {
-	background: url(skybender-sprite.png) no-repeat;
+	background: url(skybender-sprite-small.png) no-repeat;
 	display: block;
-	background-position: -5px -5px;
-	
+background-position: -5px -5px;
 }
 
+.skybender-skybender_center {
+    width: 110px;
+    height: 128px;
+    background-position: -5px -5px;
+}
+
+.skybender-skybender_left_1 {
+    width: 110px;
+    height: 128px;
+    background-position: -125px -5px;
+}
+
+.skybender-skybender_left_2 {
+    width: 110px;
+    height: 128px;
+    background-position: -245px -5px;
+}
+
+.skybender-skybender_left_3 {
+    width: 110px;
+    height: 128px;
+    background-position: -5px -143px;
+}
+
+.skybender-skybender_left_4 {
+    width: 110px;
+    height: 128px;
+    background-position: -125px -143px;
+}
+
+.skybender-skybender_left_5 {
+    width: 110px;
+    height: 128px;
+    background-position: -245px -143px;
+}
+
+.skybender-skybender_right_1 {
+    width: 110px;
+    height: 128px;
+    background-position: -5px -281px;
+}
+
+.skybender-skybender_right_2 {
+    width: 110px;
+    height: 128px;
+    background-position: -125px -281px;
+}
+
+.skybender-skybender_right_3 {
+    width: 110px;
+    height: 128px;
+    background-position: -245px -281px;
+}
+
+.skybender-skybender_right_4 {
+    width: 110px;
+    height: 128px;
+    background-position: -365px -5px;
+}
+
+.skybender-skybender_right_5 {
+    width: 110px;
+    height: 128px;
+    background-position: -365px -143px;
+}
+
+/*
 .skybender-skybender_center {
 	width: 500px;
 	height: 584px;
@@ -70,3 +136,4 @@
 	height: 584px;
 	background-position: -5px -5945px;
 }
+*/
