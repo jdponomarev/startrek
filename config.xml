@@ -4,10 +4,10 @@
 	id		= "com.unface.anonymous.chat"
 	version 	= "1.1">
 
-	<name>Анонимный чат unface.me</name>
+	<name>Star Trek</name>
 
 	<description>
-		Анонимный чат unface.me - анонимное общение с незнакомцем
+		Star trek run
 	</description>
 
 	<author href="http://jdponomarev.github.com"
