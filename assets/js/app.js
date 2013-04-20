@@ -45,25 +45,60 @@ function init(){
 	skybender.width=world.coeff*500;
 	skybender.height=world.coeff*584;
 
-	world.skybenderY=skybender.height/2-20+(580*(1-world.coeff));
+	world.skybenderY=(world.height-580);
 
-	skybender.x=world.laneWidth*2.5+(500*(1-world.coeff))+skybender.width/2;
+	skybender.x=(world.width-500)/2;
 	
-	//alert(skybender.width);
-	//alert(world.width);
-
-	
-
+	skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
 	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";	
-	skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,100px)";
 
 
 	skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));
+
+	//skybender.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+skybender.x+","+world.skybenderY+")");
 
 	skybender.$el.css({	
 		width:"500px",
 		height:"584px"
 	});
+
+		$(document).swipeLeft(function(e){
+			alert();
+			moveShip({direction:"left"});
+		});
+		$(document).swipeRight(function(e){
+			alert();
+			moveShip({direction:"right"});
+		});
+		$("body").swipeLeft(function(e){
+			alert(1);
+			moveShip({direction:"left"});
+		});
+		$("body").swipeRight(function(e){
+			alert(1);
+			moveShip({direction:"right"});
+		});		
+		$("body").swipe(function(){
+			alert(2);
+		});
+		$(document).swipe(function(){
+			alert(3);
+		});
+		$("#maincontainer").swipeLeft(function(e){
+			alert(4);
+			moveShip({direction:"left"});
+		});
+		$("#maincontainer").swipeRight(function(e){
+			alert(5);
+			moveShip({direction:"right"});
+		});		
+		$("#maincontainer").swipe(function(){
+			alert(6);
+		});
+		$("#maincontainer").swipe(function(){
+			alert(7);
+		});
+
 };
 
 function generateTransformString(transforms){
@@ -159,22 +194,7 @@ $(document).ready(function(){
 	if((window.location+"").indexOf("Document")!==-1){
 		onDeviceReady();     
 
-		$(document).swipeLeft(function(e){
-			alert();
-			moveShip({direction:"left"});
-		});
-		$(document).swipeRight(function(e){
-			alert();
-			moveShip({direction:"right"});
-		});
-		$("body").swipeLeft(function(e){
-			alert(1);
-			moveShip({direction:"left"});
-		});
-		$("body").swipeRight(function(e){
-			alert(1);
-			moveShip({direction:"right"});
-		});		
+
 		//$(document).trigger("swipeRight");
 
 		$(document).keydown(function(e) {
