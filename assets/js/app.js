@@ -63,40 +63,10 @@ function init(){
 	});
 
 		$(document).swipeLeft(function(e){
-			alert();
 			moveShip({direction:"left"});
 		});
 		$(document).swipeRight(function(e){
-			alert();
 			moveShip({direction:"right"});
-		});
-		$("body").swipeLeft(function(e){
-			alert(1);
-			moveShip({direction:"left"});
-		});
-		$("body").swipeRight(function(e){
-			alert(1);
-			moveShip({direction:"right"});
-		});		
-		$("body").swipe(function(){
-			alert(2);
-		});
-		$(document).swipe(function(){
-			alert(3);
-		});
-		$("#maincontainer").swipeLeft(function(e){
-			alert(4);
-			moveShip({direction:"left"});
-		});
-		$("#maincontainer").swipeRight(function(e){
-			alert(5);
-			moveShip({direction:"right"});
-		});		
-		$("#maincontainer").swipe(function(){
-			alert(6);
-		});
-		$("#maincontainer").swipe(function(){
-			alert(7);
 		});
 
 };
