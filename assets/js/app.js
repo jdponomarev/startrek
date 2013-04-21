@@ -162,7 +162,7 @@ function createEnemy(){
 
 };
 
-setTimeout(createEnemy,2000);
+//setTimeout(createEnemy,2000);
 
 
 function renderEnemies(){
