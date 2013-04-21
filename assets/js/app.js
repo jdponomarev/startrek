@@ -59,7 +59,7 @@ function init(){
 	skybender.width=world.coeff*world.skybenderWidth;
 	skybender.height=world.coeff*world.skybenderHeight;
 
-	world.skybenderY=(world.height-world.skybenderHeight*2);
+	world.skybenderY=(world.height-world.skybenderHeight-30);
 
 	skybender.x=(world.width-world.skybenderWidth)/2;
 	
@@ -179,7 +179,7 @@ function renderEnemies(){
 			if((enemies[i].y+150)>world.height){
 				if(enemies[i].position==skybender.position){
 					
-					alert("ты проебал!");
+					//alert("ты проебал!");
 					world.gameFinished=true;
 				}
 			}
@@ -233,9 +233,9 @@ function render(){
 	if(mod==0){
 		renderStars();
 	}else if(mod==1){
-		renderShip();
+		//renderShip();
 	}else{
-		renderEnemies();
+		//renderEnemies();
 	}
 
 
