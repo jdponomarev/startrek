@@ -86,6 +86,9 @@ function init(){
 		moveShip({direction:"right"});
 	});
 
+
+
+
 };
 
 function starsInit(){
@@ -102,6 +105,16 @@ function starsInit(){
 		});
 	}
 
+	var starsW=world.width/240;
+	var starsH=world.height/320;
+	var starsCoeff=Math.max(starsW,starsH);
+	//alert(starsCoeff);
+	$(starscanvas.$el).css({
+		left:((world.width-240)/2)+"px",
+		top:((world.height-320)/2)+"px"
+	});
+	//skybender.x=(world.width-world.skybenderWidth)/2;
+	$(starscanvas.$el).css("-webkit-transform","scale("+starsCoeff+","+starsCoeff+")");
 
 };
 
