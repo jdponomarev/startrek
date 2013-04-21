@@ -16,6 +16,11 @@ html{
 	height:100%;
 }
 
+#enemiesContainer{
+	position:absolute;
+	left:0;
+	top:0;
+}
 #skybender{
 	position:absolute;
 	width:10px;
@@ -24,6 +29,12 @@ html{
 	top:0;
 	-webkit-transform:rotate(360deg);
 }
+
+
+.enemy{
+	-webkit-transform:rotate(360deg);	
+}
+
 
 
 @-webkit-keyframes bganimation

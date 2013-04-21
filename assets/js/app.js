@@ -3,11 +3,14 @@ var renders=0;
 
 var world={
 	skybenderWidth:110,
-	skybenderHeight:128
+	skybenderHeight:128,
+	gameFinished:false
 };
 var background={
 
 };
+
+var enemies=[];
 
 var starscanvas={
 	stars:[]
@@ -60,8 +63,8 @@ function init(){
 
 	skybender.x=(world.width-world.skybenderWidth)/2;
 	
-	skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
-	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";    
+	//skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
+	//skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";    
 	//skybender.transforms.rotate="rotate(360deg)";
 	//skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));
 
@@ -102,6 +105,108 @@ function starsInit(){
 
 };
 
+
+function createEnemy(){
+	//alert();
+	if(world.gameFinished==true){
+		return;
+	}
+
+
+	setTimeout(createEnemy,Math.floor(1000+Math.random()*5000));
+
+	var type="asteroid";
+
+	var enemy={
+		$el:undefined,
+		type:type,
+		directionSprite:"center",
+		directionSpriteNum:0,
+		directionBack:false,
+		direction:"center",
+		position:Math.floor(-2+5*Math.random()),
+		isMoving:false,
+		transforms:{
+
+		},
+		width:undefined,
+		height:undefined,
+		x:undefined,
+		y:-100,
+		xShift:undefined,
+		yShift:15, //speed
+		delayStep:0,
+		rotationCoeff:Math.floor(Math.random()*5)
+	};
+	enemy.$el=$("<div></div>",{class:"enemy "+type});
+	
+	//alert(enemy.position);
+	//enemy.position=-2;
+
+	enemy.x=(world.width-world.skybenderWidth)/2+enemy.position*world.laneWidth;
+	enemy.$el.css("-webkit-transform","matrix(1,0,0,1,"+enemy.x+",-100) rotate(360deg)");
+
+
+	$("#enemiesContainer").append(enemy.$el);
+	enemies.push(enemy);
+
+	/*
+	var line="";
+	for(var i=0;i<5;i++){
+		for(var j=0;j<5;j++){
+			line+=".asteroid_"+((i*5)+j)+"{width:64px;height:64px;background-position:"+(i*-64)+"px "+(j*-64)+"px;}";
+		}
+	}
+	console.log(line);
+	*/
+
+};
+
+setTimeout(createEnemy,2000);
+
+
+function renderEnemies(){
+	for(var i=enemies.length-1; i>=0;i--){
+		//console.log("i="+i);
+		if(enemies[i].type==="asteroid"){
+
+			if(enemies[i].yShift){
+				enemies[i].y+=enemies[i].yShift;
+			}
+			console.log(enemies[i].y);
+			enemies[i].$el.css("-webkit-transform","matrix(1,0,0,1,"+enemies[i].x+","+enemies[i].y+") rotate(360deg)");
+		
+			if((enemies[i].y+150)>world.height){
+				if(enemies[i].position==skybender.position){
+					
+					alert("ты проебал!");
+					world.gameFinished=true;
+				}
+			}
+			if((enemies[i].y)>world.height){
+				enemies[i].$el.remove();		
+				enemies.splice(i,1);		
+			}
+			
+			
+			if(enemies[i].delayStep<enemies[i].rotationCoeff){
+				enemies[i].delayStep++;
+				continue;
+			}
+			enemies[i].delayStep=0;
+			enemies[i].$el.removeClass();
+			enemies[i].$el.addClass("asteroid asteroid_"+enemies[i].directionSpriteNum); 		
+			if(enemies[i].directionSpriteNum>23){
+				enemies[i].directionSpriteNum=0;	
+			}
+			enemies[i].directionSpriteNum++;
+			
+
+
+		}
+	}
+};
+
 function generateTransformString(transforms){
 	var transformString="";
 	for(var t in transforms){
@@ -114,17 +219,23 @@ setInterval(function(){
 	console.log("renders="+renders);
 },5000);
 function render(){
+	if(world.gameFinished===true){
+		return;
+	}
+
 	window.requestAnimationFrame(function() {
 		//setTimeout(function() {
 			render();
 		//},1000/30);
 	}); 
 	
-
-	if(renders%3!=0){
+	var mod=renders%3;
+	if(mod==0){
 		renderStars();
-	}else{
+	}else if(mod==1){
 		renderShip();
+	}else{
+		renderEnemies();
 	}
 
 

@@ -1,0 +1,10 @@
+.asteroid {
+	background: url(asteroid.png) no-repeat;
+	display: block;
+	background-position: 0px 0px;
+	width:64px;
+	height:64px;
+}
+
+.asteroid_0{width:64px;height:64px;background-position:0px 0px;}.asteroid_1{width:64px;height:64px;background-position:0px -64px;}.asteroid_2{width:64px;height:64px;background-position:0px -128px;}.asteroid_3{width:64px;height:64px;background-position:0px -192px;}.asteroid_4{width:64px;height:64px;background-position:0px -256px;}.asteroid_5{width:64px;height:64px;background-position:-64px 0px;}.asteroid_6{width:64px;height:64px;background-position:-64px -64px;}.asteroid_7{width:64px;height:64px;background-position:-64px -128px;}.asteroid_8{width:64px;height:64px;background-position:-64px -192px;}.asteroid_9{width:64px;height:64px;background-position:-64px -256px;}.asteroid_10{width:64px;height:64px;background-position:-128px 0px;}.asteroid_11{width:64px;height:64px;background-position:-128px -64px;}.asteroid_12{width:64px;height:64px;background-position:-128px -128px;}.asteroid_13{width:64px;height:64px;background-position:-128px -192px;}.asteroid_14{width:64px;height:64px;background-position:-128px -256px;}.asteroid_15{width:64px;height:64px;background-position:-192px 0px;}.asteroid_16{width:64px;height:64px;background-position:-192px -64px;}.asteroid_17{width:64px;height:64px;background-position:-192px -128px;}.asteroid_18{width:64px;height:64px;background-position:-192px -192px;}.asteroid_19{width:64px;height:64px;background-position:-192px -256px;}.asteroid_20{width:64px;height:64px;background-position:-256px 0px;}.asteroid_21{width:64px;height:64px;background-position:-256px -64px;}.asteroid_22{width:64px;height:64px;background-position:-256px -128px;}.asteroid_23{width:64px;height:64px;background-position:-256px -192px;}.asteroid_24{width:64px;height:64px;background-position:-256px -256px;} 
+
