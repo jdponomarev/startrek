@@ -157,7 +157,7 @@ function createEnemy(){
 	enemy.x=(world.width-64)/2;
 
 
-	var delta=enemy.position*world.laneWidth/(world.coeff);
+	var delta=enemy.position*world.laneWidth;
 	//alert(delta+"   coeff="+world.coeff);
 	enemy.x+=delta;
 	enemy.$el.css("-webkit-transform","matrix(1,0,0,1,"+enemy.x+",-100) rotate(360deg)");
