@@ -25,17 +25,12 @@ html{
 	-webkit-transform:rotate(360deg);
 }
 
-@keyframes bganimation
-{
-	0% {background-position: 0px 0px;}
-	50% {background-position: 0px 250000px;}
-	100% {background-position: 0px 500000px;}
-}
+
 @-webkit-keyframes bganimation
 {
 	0% {background-position: 0px 0px;}
-	50% {background-position: 0px 250000px;}
-	100% {background-position: 0px 500000px;}
+	50% {background-position: 0px 2500px;}
+	100% {background-position: 0px 5000px;}
 }
 .animated-background{
 	-webkit-transform: rotate(0deg);
@@ -45,10 +40,11 @@ html{
 	position:absolute;
 	width:100%;
 	height:100%;
-	background:url("Parallax100.png");
+	background:url("space.png");
+	/*
 	-webkit-animation: bganimation 1000s infinite;
 	animation: bganimation 1000s infinite;
-	
+	*/
 }/*
 #background-3{
 	position:absolute;

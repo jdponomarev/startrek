@@ -5,6 +5,9 @@ var world={
 	skybenderWidth:110,
 	skybenderHeight:128
 };
+var background={
+
+};
 var skybender={
 	$el:undefined,
 	directionSprite:"center",
@@ -32,6 +35,7 @@ function onDeviceReady(){
 
 function init(){
 	skybender.$el=$("#skybender");
+	background.$el=$("#background-1");
 	//alert($(window).width());
 	world.width=$(window).width();
 	world.height=$(window).height();
@@ -87,6 +91,9 @@ function render(){
 		//},1000/30);
 	});	
 	//console.log("render");
+
+	background.$el.css("background-position","0px "+renders+"px");
+
 	if(skybender.direction!="center"){
 		//console.log("skybender.direction="+skybender.direction);
 		if(skybender.directionBack===true){
