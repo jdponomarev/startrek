@@ -59,10 +59,10 @@ function init(){
 	skybender.width=world.coeff*world.skybenderWidth;
 	skybender.height=world.coeff*world.skybenderHeight;
 
-	world.skybenderY=(world.height-world.skybenderHeight-30);
+	world.skybenderY=(world.height-world.skybenderHeight-15);
 
 	skybender.x=(world.width-world.skybenderWidth)/2;
-	
+	skybender.y=world.skybenderY;
 	//skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
 	//skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";    
 	//skybender.transforms.rotate="rotate(360deg)";
@@ -85,10 +85,6 @@ function init(){
 	$(document).swipeRight(function(e){
 		moveShip({direction:"right"});
 	});
-
-
-
-
 };
 
 function starsInit(){
@@ -105,6 +101,8 @@ function starsInit(){
 		});
 	}
 
+
+	/*
 	var starsW=world.width/240;
 	var starsH=world.height/320;
 	var starsCoeff=Math.max(starsW,starsH);
@@ -115,7 +113,7 @@ function starsInit(){
 	});
 	//skybender.x=(world.width-world.skybenderWidth)/2;
 	$(starscanvas.$el).css("-webkit-transform","scale("+starsCoeff+","+starsCoeff+")");
-
+	*/
 };
 
 
@@ -154,9 +152,14 @@ function createEnemy(){
 	enemy.$el=$("<div></div>",{class:"enemy "+type});
 	
 	//alert(enemy.position);
-	//enemy.position=-2;
+	enemy.position=2;
 
-	enemy.x=(world.width-world.skybenderWidth)/2+enemy.position*world.laneWidth;
+	enemy.x=(world.width-64)/2;
+
+
+	var delta=enemy.position*world.laneWidth/(world.coeff);
+	//alert(delta+"   coeff="+world.coeff);
+	enemy.x+=delta;
 	enemy.$el.css("-webkit-transform","matrix(1,0,0,1,"+enemy.x+",-100) rotate(360deg)");
 
 
@@ -175,7 +178,7 @@ function createEnemy(){
 
 };
 
-//setTimeout(createEnemy,2000);
+setTimeout(createEnemy,2000);
 
 
 function renderEnemies(){
@@ -186,17 +189,20 @@ function renderEnemies(){
 			if(enemies[i].yShift){
 				enemies[i].y+=enemies[i].yShift;
 			}
-			console.log(enemies[i].y);
+			//console.log(enemies[i].y);
 			enemies[i].$el.css("-webkit-transform","matrix(1,0,0,1,"+enemies[i].x+","+enemies[i].y+") rotate(360deg)");
 		
-			if((enemies[i].y+150)>world.height){
-				if(enemies[i].position==skybender.position){
+			//console.log("e="+enemies[i].y+"    s="+skybender.y);
+			if(enemies[i].y>skybender.y-30){
+				//alert(enemies[i].x+"    "+skybender.x);
+				if(Math.abs((enemies[i].x+32)-(skybender.x+skybender.width/2))<70){
 					
 					//alert("ты проебал!");
 					world.gameFinished=true;
 				}
 			}
 			if((enemies[i].y)>world.height){
+				//alert(">>>");
 				enemies[i].$el.remove();		
 				enemies.splice(i,1);		
 			}
@@ -246,9 +252,9 @@ function render(){
 	if(mod==0){
 		renderStars();
 	}else if(mod==1){
-		//renderShip();
+		renderShip();
 	}else{
-		//renderEnemies();
+		renderEnemies();
 	}
 
 
@@ -329,7 +335,7 @@ function renderStars(){
 		if(starscanvas.stars[i].y>starscanvas.$el.height){
 			starscanvas.stars[i].y=0;
 		}
-	}     
+	}
 };
 
 function moveShip(params){
