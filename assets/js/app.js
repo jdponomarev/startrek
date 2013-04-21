@@ -8,6 +8,11 @@ var world={
 var background={
 
 };
+
+var starscanvas={
+	stars:[]
+};
+
 var skybender={
 	$el:undefined,
 	directionSprite:"center",
@@ -67,12 +72,32 @@ function init(){
 		height:world.skybenderHeight+"px"
 	});
 
+
+	starsInit();
+
 	$(document).swipeLeft(function(e){
 		moveShip({direction:"left"});
 	});
 	$(document).swipeRight(function(e){
 		moveShip({direction:"right"});
 	});
+
+};
+
+function starsInit(){
+	starscanvas.$el=document.getElementById("starscanvas");
+	starscanvas.ctx=starscanvas.$el.getContext("2d");
+
+	//alert(starscanvas.ctx);
+
+	for(var i=0;i<100;i++){
+		starscanvas.stars.push({
+			x:Math.round(Math.random()*starscanvas.$el.width),
+			y:Math.round(Math.random()*starscanvas.$el.height),
+			z:Math.round(Math.random()*3+1)
+		});
+	}
+
 
 };
 
@@ -84,6 +109,9 @@ function generateTransformString(transforms){
 	return transformString;
 };
 
+setInterval(function(){
+	console.log("renders="+renders);
+},5000);
 function render(){
 	window.requestAnimationFrame(function() {
 		//setTimeout(function() {
@@ -145,6 +173,27 @@ function render(){
 
 		}
 	}
+
+
+
+		starscanvas.ctx.fillStyle="black";
+        starscanvas.ctx.fillRect(0,0,starscanvas.$el.width,starscanvas.$el.height);
+        // Draw the stars.
+       	starscanvas.ctx.fillStyle="white";
+        for(i=0;i<starscanvas.stars.length;i++){
+            starscanvas.ctx.fillRect(starscanvas.stars[i].x,starscanvas.stars[i].y,1,3);
+        }
+
+        for(i=0;i<starscanvas.stars.length;i++){
+            starscanvas.stars[i].y+=starscanvas.stars[i].z;
+            if(starscanvas.stars[i].y>starscanvas.$el.height){
+            	starscanvas.stars[i].y=0;
+            }
+        }
+
+
+
+
 	renders++;
 	if(renders>5000){
 		//return;
