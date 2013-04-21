@@ -59,7 +59,7 @@ function init(){
 	skybender.width=world.coeff*world.skybenderWidth;
 	skybender.height=world.coeff*world.skybenderHeight;
 
-	world.skybenderY=(world.height-world.skybenderHeight);
+	world.skybenderY=(world.height-world.skybenderHeight*2);
 
 	skybender.x=(world.width-world.skybenderWidth)/2;
 	
@@ -136,7 +136,7 @@ function createEnemy(){
 		xShift:undefined,
 		yShift:15, //speed
 		delayStep:0,
-		rotationCoeff:Math.floor(Math.random()*5)
+		rotationCoeff:Math.floor(4+Math.random()*3)
 	};
 	enemy.$el=$("<div></div>",{class:"enemy "+type});
 	
