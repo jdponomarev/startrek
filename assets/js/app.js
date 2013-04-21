@@ -29,7 +29,8 @@ var skybender={
 	x:undefined,
 	y:undefined,
 	xShift:undefined,
-	yShift:undefined
+	yShift:undefined,
+	delayStep:0
 };
 
 document.addEventListener("deviceready", onDeviceReady, true);
@@ -60,14 +61,14 @@ function init(){
 	skybender.x=(world.width-world.skybenderWidth)/2;
 	
 	skybender.transforms.translated3d="translate3d("+ skybender.x +'px,'+world.skybenderY+"px,0px)";
-	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";	
+	skybender.transforms.scale="scale("+world.coeff+","+world.coeff+")";    
 	//skybender.transforms.rotate="rotate(360deg)";
 	//skybender.$el.css("-webkit-transform",generateTransformString(skybender.transforms));
 
 
 	skybender.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+skybender.x+","+world.skybenderY+") rotate(360deg)");
 
-	skybender.$el.css({	
+	skybender.$el.css({ 
 		width:world.skybenderWidth+"px",
 		height:world.skybenderHeight+"px"
 	});
@@ -90,7 +91,7 @@ function starsInit(){
 
 	//alert(starscanvas.ctx);
 
-	for(var i=0;i<100;i++){
+	for(var i=0;i<25;i++){
 		starscanvas.stars.push({
 			x:Math.round(Math.random()*starscanvas.$el.width),
 			y:Math.round(Math.random()*starscanvas.$el.height),
@@ -117,13 +118,22 @@ function render(){
 		//setTimeout(function() {
 			render();
 		//},1000/30);
-	});	
-	//console.log("render");
+	}); 
+	
 
-	background.$el.css("background-position","0px "+renders+"px");
+	if(renders%3!=0){
+		renderStars();
+	}else{
+		renderShip();
+	}
 
+
+	renders++;
+
+
+};
+function renderShip(){
 	if(skybender.direction!="center"){
-		//console.log("skybender.direction="+skybender.direction);
 		if(skybender.directionBack===true){
 			skybender.directionSpriteNum--;
 		}else{
@@ -147,7 +157,7 @@ function render(){
 		}else{
 			degrees*=-1;
 		}
-		*/		
+		*/      
 
 
 		//skybender.$el.removeClass("skybender-skybender_center skybender-skybender_left_1 skybender-skybender_left_2 skybender-skybender_left_3 skybender-skybender_left_4 skybender-skybender_left_5 skybender-skybender_right_1 skybender-skybender_right_2 skybender-skybender_right_3 skybender-skybender_right_4 skybender-skybender_right_5");
@@ -158,9 +168,11 @@ function render(){
 		//skybender.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+skybender.x+","+world.skybenderY+") rotate("+degrees+"deg)");
 
 
-		skybender.$el.removeClass("skybender-skybender_center skybender-skybender_left_1 skybender-skybender_left_2 skybender-skybender_left_3 skybender-skybender_left_4 skybender-skybender_left_5 skybender-skybender_right_1 skybender-skybender_right_2 skybender-skybender_right_3 skybender-skybender_right_4 skybender-skybender_right_5");
-		skybender.$el.addClass("skybender skybender-skybender_"+skybender.direction+"_"+skybender.directionSpriteNum);		
-		
+		if(skybender.delayStep==0){
+			//alert();
+			skybender.$el.removeClass("skybender-skybender_center skybender-skybender_left_1 skybender-skybender_left_2 skybender-skybender_left_3 skybender-skybender_left_4 skybender-skybender_left_5 skybender-skybender_right_1 skybender-skybender_right_2 skybender-skybender_right_3 skybender-skybender_right_4 skybender-skybender_right_5");
+			skybender.$el.addClass("skybender skybender-skybender_"+skybender.direction+"_"+skybender.directionSpriteNum);      
+		}
 		if(skybender.directionSpriteNum==5){
 			skybender.directionBack=true;
 		}
@@ -169,6 +181,7 @@ function render(){
 			skybender.direction="center";
 			skybender.xShift=0;
 			//alert("back");
+			skybender.delayStep=0;
 			skybender.directionBack=false;
 			skybender.directionSpriteNum=0;
 			skybender.isMoving=false;
@@ -178,32 +191,21 @@ function render(){
 
 		}
 	}
-
-
-
-		starscanvas.ctx.fillStyle="black";
-        starscanvas.ctx.fillRect(0,0,starscanvas.$el.width,starscanvas.$el.height);
-        // Draw the stars.
-       	starscanvas.ctx.fillStyle="white";
-        for(i=0;i<starscanvas.stars.length;i++){
-            starscanvas.ctx.fillRect(starscanvas.stars[i].x,starscanvas.stars[i].y,1,3);
-        }
-
-        for(i=0;i<starscanvas.stars.length;i++){
-            starscanvas.stars[i].y+=starscanvas.stars[i].z;
-            if(starscanvas.stars[i].y>starscanvas.$el.height){
-            	starscanvas.stars[i].y=0;
-            }
-        }
-
-
-
-
-	renders++;
-	if(renders>5000){
-		//return;
+};
+function renderStars(){
+	starscanvas.ctx.fillStyle="black";
+	starscanvas.ctx.fillRect(0,0,starscanvas.$el.width,starscanvas.$el.height);
+	// Draw the stars.
+	starscanvas.ctx.fillStyle="white";
+	for(i=0;i<starscanvas.stars.length;i++){
+		starscanvas.ctx.fillRect(starscanvas.stars[i].x,starscanvas.stars[i].y,1,3);
 	}
-
+	for(i=0;i<starscanvas.stars.length;i++){
+		starscanvas.stars[i].y+=starscanvas.stars[i].z;
+		if(starscanvas.stars[i].y>starscanvas.$el.height){
+			starscanvas.stars[i].y=0;
+		}
+	}     
 };
 
 function moveShip(params){
