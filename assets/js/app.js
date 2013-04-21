@@ -195,7 +195,7 @@ function renderEnemies(){
 			//console.log("e="+enemies[i].y+"    s="+skybender.y);
 			if(enemies[i].y>skybender.y-30){
 				//alert(enemies[i].x+"    "+skybender.x);
-				if(Math.abs((enemies[i].x+32)-(skybender.x+skybender.width/2))<100){
+				if((Math.abs((enemies[i].x+32)-(skybender.x+skybender.width/2))<100)&&(skybender.position==enemies[i].position)){
 					
 					//alert("ты проебал!");
 					world.gameFinished=true;
