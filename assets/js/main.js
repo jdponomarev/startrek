@@ -1,7 +1,7 @@
 var starbenderActor;
 var starbenderImage;
 function __scene(director) {
- 	
+	
 	var scene= director.createScene();
  
 	var bg= new CAAT.ActorContainer().
@@ -20,16 +20,44 @@ function __scene(director) {
 			addAnimation("stop",[0],0).
 			addAnimation("moveright",[0,8,9,10,3,7,3,10,9,8,0],100,resetAniimation).
 			addAnimation("moveleft",[0,1,2,4,5,6,5,4,2,1,0],100,resetAniimation);
- 	
+	
 
- 	starbenderActor= new CAAT.Actor().setBackgroundImage(
-                    starbenderImage.getRef(), true ).
- 					setSpriteIndex( 0 ).centerOn(300,400).
- 					enableEvents(true);
+	starbenderActor= new CAAT.Actor().setBackgroundImage(
+					starbenderImage.getRef(), true ).
+					setSpriteIndex( 0 ).centerOn(100,100).
+					enableEvents(true);
 
- 	bg.addChild(starbenderActor);
+	bg.addChild(starbenderActor);
  
 
+
+	scene.createTimer(
+			0,
+			Number.MAX_VALUE,
+			function(scene_time, timer_time, timertask_instance)  {   // timeout
+			},
+			function(scene_time, timer_time, timertask_instance)  {   // tick
+				//alert();
+				var x=Math.floor(Math.random()*director.width);
+				var path= new CAAT.Path().
+			        beginPath(x,-100).
+			        addLineTo(x,1000).
+			        endPath();	
+
+
+				var bubble = new CAAT.ShapeActor().
+	                setLocation(x, 100).
+	                setSize(2, 6).
+	                setShape(CAAT.ShapeActor.prototype.SHAPE_RECTANGLE).
+	                enableEvents(false).
+	                setCompositeOp('lighter').
+	                setFrameTime(scene.time, 1000).
+	                setFillStyle( "white" ).addBehavior( new CAAT.PathBehavior().setPath(path).setFrameTime(scene.time,1000) );
+	            bg.addChild(bubble);
+			},
+			function(scene_time, timer_time, timertask_instance)  {   // cancel
+			}
+	);
 
 	CAAT.registerKeyListener( function(keyEvent) {
 		if ( keyEvent.getKeyCode()===CAAT.Keys.LEFT ) {
@@ -46,14 +74,14 @@ function moveShip(params){
 		starbenderActor.x-=50;
 	}else if(params.direction=="right"){
 		starbenderActor.playAnimation("moveright");
-		starbenderActor.x+=50;		
+		starbenderActor.x+=50;      
 	}
 };
 
 function __init()   {
  
 	var director = new CAAT.Director().
-			initialize(700,500, document.getElementById('_c1')).
+			initialize(document.width,document.height, document.getElementById('_c1')).
 			setClear(false);
  
 	new CAAT.ImagePreloader().loadImages(
