@@ -122,12 +122,12 @@ function createEnemy(){
 	if(world.gameFinished==true){
 		return;
 	}
+	var types=["asteroid","bird"];
 
+	setTimeout(createEnemy,Math.floor(1000+Math.random()*2000));
 
-	setTimeout(createEnemy,Math.floor(1000+Math.random()*5000));
-
-	var type="asteroid";
-
+	var type=types[Math.floor(Math.random()*types.length)];
+	type="bird";
 	var enemy={
 		$el:undefined,
 		type:type,
@@ -149,19 +149,26 @@ function createEnemy(){
 		delayStep:0,
 		rotationCoeff:Math.floor(4+Math.random()*3)
 	};
+
 	enemy.$el=$("<div></div>",{class:"enemy "+type});
+	enemy.position=2;
+
+	if(enemy.type=="bird"){
+		enemy.x=(world.width-110)/2;
+		var delta=enemy.position*world.laneWidth;
+
+		enemy.x+=delta;
+		enemy.$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+enemy.x+",-100) rotate(360deg)");
+	}else if(enemy.type=="asteroid"){
+		enemy.x=(world.width-64)/2;
+		var delta=enemy.position*world.laneWidth;
+
+		enemy.x+=delta;
+		enemy.$el.css("-webkit-transform","matrix(1,0,0,1,"+enemy.x+",-100) rotate(360deg)");
+
+
+	}
 	
-	//alert(enemy.position);
-	//enemy.position=2;
-
-	enemy.x=(world.width-64)/2;
-
-
-	var delta=enemy.position*world.laneWidth;
-	//alert(delta+"   coeff="+world.coeff);
-	enemy.x+=delta;
-	enemy.$el.css("-webkit-transform","matrix(1,0,0,1,"+enemy.x+",-100) rotate(360deg)");
-
 
 	$("#enemiesContainer").append(enemy.$el);
 	enemies.push(enemy);
@@ -184,30 +191,14 @@ setTimeout(createEnemy,2000);
 function renderEnemies(){
 	for(var i=enemies.length-1; i>=0;i--){
 		//console.log("i="+i);
-		if(enemies[i].type==="asteroid"){
-
-			if(enemies[i].yShift){
-				enemies[i].y+=enemies[i].yShift;
-			}
-			//console.log(enemies[i].y);
-			enemies[i].$el.css("-webkit-transform","matrix(1,0,0,1,"+enemies[i].x+","+enemies[i].y+") rotate(360deg)");
+		if(enemies[i].yShift){
+			enemies[i].y+=enemies[i].yShift;
+		}
+		//console.log(enemies[i].y);
 		
-			//console.log("e="+enemies[i].y+"    s="+skybender.y);
-			if(enemies[i].y>skybender.y-30){
-				//alert(enemies[i].x+"    "+skybender.x);
-				if((Math.abs((enemies[i].x+32)-(skybender.x+skybender.width/2))<100)&&(skybender.position==enemies[i].position)){
-					
-					//alert("ты проебал!");
-					world.gameFinished=true;
-				}
-			}
-			if((enemies[i].y)>world.height){
-				//alert(">>>");
-				enemies[i].$el.remove();		
-				enemies.splice(i,1);		
-			}
-			
-			
+
+		if(enemies[i].type==="asteroid"){		
+			enemies[i].$el.css("-webkit-transform","matrix(1,0,0,1,"+enemies[i].x+","+enemies[i].y+") rotate(360deg)");
 			if(enemies[i].delayStep<enemies[i].rotationCoeff){
 				enemies[i].delayStep++;
 				continue;
@@ -219,9 +210,22 @@ function renderEnemies(){
 				enemies[i].directionSpriteNum=0;	
 			}
 			enemies[i].directionSpriteNum++;
-			
+		}else if(enemies[i].type==="bird"){
+			enemies[i].$el.css("-webkit-transform","matrix("+world.coeff+",0,0,"+world.coeff+","+enemies[i].x+","+enemies[i].y+") rotate(360deg)");
+		}
 
-
+		if(enemies[i].y>skybender.y-30){
+			//alert(enemies[i].x+"    "+skybender.x);
+			if((Math.abs((enemies[i].x+32)-(skybender.x+skybender.width/2))<100)&&(skybender.position==enemies[i].position)){
+				
+				//alert("ты проебал!");
+				world.gameFinished=true;
+			}
+		}
+		if((enemies[i].y)>world.height){
+			//alert(">>>");
+			enemies[i].$el.remove();		
+			enemies.splice(i,1);		
 		}
 	}
 };

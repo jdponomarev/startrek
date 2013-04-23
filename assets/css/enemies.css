@@ -1,3 +1,11 @@
+
+.bird{
+	background: url(bird_small.png) no-repeat;
+	display: block;
+	background-position: 0px 0px;
+	width:110px;
+	height:76px;		
+}
 .asteroid {
 	background: url(asteroid.png) no-repeat;
 	display: block;
