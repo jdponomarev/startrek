@@ -1,5 +1,6 @@
 var starbenderActor;
 var starbenderImage;
+
 function __scene(director) {
 	
 	var scene= director.createScene();
@@ -94,20 +95,33 @@ function __init()   {
 		}
 	);
 
+	setInterval(function(){
+		moveShip({direction:"right"});
+	},5000);
+	/*
 	$(document).swipeLeft(function(e){
 		moveShip({direction:"left"});
 	});
 	$(document).swipeRight(function(e){
 		moveShip({direction:"right"});
 	});
+	*/
  
 	CAAT.loop(0);
 }
 
-document.addEventListener("deviceready", onDeviceReady, true);
+
+window.addEventListener( "load", __init, false );
+
+/*
 function onDeviceReady(){
 	__init();
 };
+document.addEventListener("deviceready", onDeviceReady, true);
+*/
+
+/*
+if((window.location+"").indexOf("Document")!==-1){
 
 $(document).ready(function(){
 	//alert("doc ready");
@@ -116,5 +130,8 @@ $(document).ready(function(){
 		onDeviceReady();           
 	}
 });
- 
+}else{
+	__init();
+}
+*/
 
